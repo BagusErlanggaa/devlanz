@@ -71,7 +71,19 @@ const META_ABOUT = {
 title:['Tentang Kami — Lanz Dev | Profil M. Bagus Erlangga','About Us — Lanz Dev | M. Bagus Erlangga Profile'],
 desc:['Kenali Lanz Dev, studio pengembangan digital independen di Depok yang dipimpin oleh M. Bagus Erlangga. Membangun website performa tinggi dengan dedikasi langsung tanpa perantara.','Meet Lanz Dev, an independent digital development studio in Depok led by M. Bagus Erlangga. Building high-performance websites with direct dedication and no middlemen.']
 };
-const META = { home: META_HOME, about: META_ABOUT };
+const META_SERVICES = {
+title:['Layanan Web Development — Lanz Dev | Jasa Pembuatan Website','Web Development Services — Lanz Dev | Professional Website Development'],
+desc:['Layanan lengkap pembuatan website profesional oleh Lanz Dev di Depok: Website Perusahaan, Landing Page Konversi, Top Up Game Otomatis, LMS Coding, dan Web App Laravel kustom.','Complete professional website services by Lanz Dev in Depok: Company Websites, Conversion Landing Pages, Automated Game Top-Up, Coding LMS, and custom Laravel Web Apps.']
+};
+const META_PRICING = {
+title:['Paket & Harga — Lanz Dev | Investasi Jasa Pembuatan Website','Pricing & Packages — Lanz Dev | Website Development Investment'],
+desc:['Daftar harga transparan jasa pembuatan website profesional oleh Lanz Dev. Tanpa biaya langganan tersembunyi. Source code 100% milik Anda.','Transparent pricing for professional website development by Lanz Dev. No hidden subscription fees. Source code is 100% yours.']
+};
+const META_CONTACT = {
+title:['Hubungi Kami — Lanz Dev | Konsultasi Proyek Website','Contact Us — Lanz Dev | Website Project Consultation'],
+desc:['Hubungi Lanz Dev di Depok untuk konsultasi pembuatan website perusahaan, landing page, atau aplikasi web kustom bersama M. Bagus Erlangga.','Contact Lanz Dev in Depok for a consultation on company websites, landing pages, or custom web apps with M. Bagus Erlangga.']
+};
+const META = { home: META_HOME, about: META_ABOUT, services: META_SERVICES, pricing: META_PRICING, contact: META_CONTACT };
 Object.assign(D, {
 aEye:['Tentang Studio & Pendiri','About the Studio & Founder'],
 aH1:['Dedikasi langsung, tanpa perantara birokratis<span class="text-blue">.</span>','Direct dedication, no bureaucratic middlemen<span class="text-blue">.</span>'],
@@ -86,6 +98,30 @@ p1t:['Presisi Tipografi & Grid','Typography & Grid Precision'], p1d:['Setiap mar
 p2t:['Kecepatan & Performa','Speed & Performance'], p2d:['Website dimuat di bawah 500 milidetik dengan skor PageSpeed 90+ dan CDN Cloudflare teroptimasi.','Websites load in under 500 milliseconds with a PageSpeed score of 90+ and an optimized Cloudflare CDN.'],
 p3t:['Kepemilikan Penuh 100%','100% Full Ownership'], p3d:['Source code, lisensi domain, dan aset digital diserahkan utuh kepada Anda tanpa vendor-lock.','Source code, domain licenses, and digital assets are handed over to you in full, with no vendor lock-in.'],
 p4t:['Garansi & Support Nyata','Real Warranty & Support'], p4d:['Pendampingan teknis gratis 30–60 hari pasca rilis untuk memastikan operasional Anda lancar.','Free technical support for 30–60 days after launch to keep your operations running smoothly.']
+});
+
+Object.assign(D, {
+sEye:['Layanan Kami','Our Services'],
+sH1:['Solusi website terukur untuk bisnis berkembang<span class="text-blue">.</span>','Measurable website solutions for growing businesses<span class="text-blue">.</span>'],
+sP:['Dari rancangan wireframe sampai kode produksi, setiap produk kami bangun menggunakan teknologi mutakhir yang cepat, aman, dan mudah dikelola.','From wireframes to production code, every product is built with modern technology that is fast, secure, and easy to manage.'],
+prEye:['Investasi & Skema Biaya','Investment & Pricing Scheme'],
+prH1:['Investasi transparan per proyek<span class="text-blue">.</span>','Transparent per-project pricing<span class="text-blue">.</span>'],
+prP:['Biaya jasa pembuatan website profesional done-for-you. Tanpa skema bulanan tersembunyi. Seluruh source code dan domain menjadi aset permanen Anda.','Professional done-for-you website pricing. No hidden monthly fees. All source code and domains become your permanent assets.'],
+pb1d:['Kami menyajikan wireframe dan mockup desain terlebih dahulu. Koding baru dimulai setelah Anda 100% puas.','We present wireframes and design mockups first. Coding only begins once you are 100% satisfied.'],
+pb2d:['Website dimuat dalam waktu di bawah 1 detik dengan standar Google Core Web Vitals tinggi.','Websites load in under 1 second and meet high Google Core Web Vitals standards.'],
+pb3d:['Jika ada bug atau kendala teknis setelah peluncuran, tim kami memperbaikinya segera tanpa biaya ekstra.','If a bug or technical issue appears after launch, we fix it promptly at no extra cost.'],
+cEye:['Saluran Resmi','Official Channel'],
+cH1:['Mari diskusikan ide proyek Anda<span class="text-blue">.</span>','Let us discuss your project idea<span class="text-blue">.</span>'],
+cP:['Punya rencana peluncuran produk, peremajaan website perusahaan, atau butuh sistem kustom? Kami siap mendengar dan memberi saran teknis terbaik.','Planning a product launch, a company website refresh, or need a custom system? We are ready to listen and give the best technical advice.'],
+cDesc:['Studio pengembangan perangkat lunak dan desain web independen.','Independent software development and web design studio.'],
+cWa:['WhatsApp Resmi','Official WhatsApp'], cResp:['Respons cepat &lt; 2 jam kerja','Fast response &lt; 2 business hours'],
+cLoc:['Lokasi & Jangkauan','Location & Coverage'], cLocV:['Gandul, Depok, Jawa Barat, Indonesia','Gandul, Depok, West Java, Indonesia'],
+cLocS:['Melayani klien di seluruh Indonesia & remote global','Serving clients across Indonesia & remote worldwide'],
+cHrs:['Jam Kerja Konsultasi','Consultation Hours'], cHrsV:['Senin – Jumat, 09.00 – 18.00 WIB','Monday – Friday, 09:00 – 18:00 WIB (GMT+7)'],
+cFH:['Kirim Ringkasan Kebutuhan','Send Your Project Brief'],
+cPh:['Nomor WhatsApp *','WhatsApp Number *'], cNeed:['Kebutuhan Proyek *','Project Needs *'], cMsg:['Deskripsi Singkat *','Short Description *'],
+cphN:['Nama Anda','Your name'], cphM:['Ceritakan tujuan website Anda, referensi tampilan yang disukai, atau target peluncuran...','Tell us your website goals, preferred design references, or launch target...'],
+cNote:['Pesan akan diteruskan ke WhatsApp resmi.','Your message will be forwarded to the official WhatsApp.']
 });
 
 /* ---------- DATA [id, en] ---------- */
@@ -165,6 +201,17 @@ const OPT = {
 subject:[['Website Perusahaan','Company Website'],['Landing Page','Landing Page'],['Toko Online','Online Store'],['UI/UX Design','UI/UX Design'],['Aplikasi Web Kustom','Custom Web App'],['Perawatan & Optimasi','Maintenance & Optimization'],['Lainnya','Other']],
 budget:[['Belum tahu','Not sure yet'],['< Rp 2 juta','< Rp 2 million'],['Rp 2–5 juta','Rp 2–5 million'],['Rp 5–15 juta','Rp 5–15 million'],['> Rp 15 juta','> Rp 15 million']],
 deadline:[['Fleksibel','Flexible'],['1–2 minggu','1–2 weeks'],['1 bulan','1 month'],['2–3 bulan','2–3 months']]};
+const SV = [
+['web-perusahaan','01 / CORPORATE',['Website Perusahaan (Company Profile)','Company Website (Company Profile)'],['Profil multipage komprehensif dengan struktur informasi rapi, desain korporat kredibel, serta SEO teroptimasi untuk menarik calon klien B2B dan investor.','A comprehensive multipage profile with tidy information structure, credible corporate design, and optimized SEO to attract B2B clients and investors.'],['Multipage',['SEO Semantik','Semantic SEO'],['Email Bisnis','Business Email']],['Website Perusahaan','Company Website']],
+['landing-page','02 / CONVERSION',['Landing Page Fokus Konversi','Conversion-Focused Landing Page'],['Satu halaman berdaya konversi tinggi untuk kampanye iklan, peluncuran produk baru, atau lead generation dengan waktu muat instan di bawah 0.5 detik.','A single high-conversion page for ad campaigns, new product launches, or lead generation, with instant load times under 0.5 seconds.'],['Copywriting','Ultra-Fast','WhatsApp Form'],['Landing Page','Landing Page']],
+['topup-ecommerce','03 / E-COMMERCE',['Top Up Game & Toko Online','Game Top-Up & Online Store'],['Platform transaksi otomatis 24 jam dengan validasi ID game instan, integrasi payment gateway QRIS, Virtual Account, serta notifikasi WhatsApp otomatis.','A 24/7 automated transaction platform with instant game ID validation, QRIS and Virtual Account payment gateway integration, and automatic WhatsApp notifications.'],['Payment QRIS',['Cek ID Otomatis','Auto ID Check'],['Dashboard Omset','Revenue Dashboard']],['Top Up Game','Game Top-Up']],
+['lms-custom','04 / EDUCATION & WEB APP',['Sistem LMS & Aplikasi Web Kustom','LMS & Custom Web Applications'],['Portal e-learning untuk kursus online dengan sistem modul materi video, ujian kuis otomatis, sertifikat digital dinamis, serta hak akses multi-user.','An e-learning portal for online courses with video lesson modules, automatic quiz exams, dynamic digital certificates, and multi-user access control.'],['Laravel','Multi-User LMS',['Sertifikat Otomatis','Auto Certificates']],['Sistem LMS','LMS']],
+['speed-seo','05 / PERFORMANCE',['Audit Performa & Optimasi PageSpeed','Performance Audit & PageSpeed Optimization'],['Meningkatkan skor Google Core Web Vitals website Anda hingga 95+, kompresi gambar otomatis WebP, minifikasi script, dan konfigurasi CDN Cloudflare.','Raising your website Google Core Web Vitals score up to 95+, with automatic WebP image compression, script minification, and Cloudflare CDN configuration.'],['Score 90+','Cloudflare Edge','Core Web Vitals'],['Audit Performa','Performance Audit']],
+['maintenance','06 / MAINTENANCE',['Perawatan & Keamanan Rutin','Routine Maintenance & Security'],['Layanan pemeliharaan server, pencadangan (backup) database otomatis, perpanjangan domain & SSL, serta penanganan error/bug prioritas.','Server maintenance, automatic database backups, domain & SSL renewal, and priority error/bug handling.'],[['Backup Rutin','Routine Backups'],['Proteksi DDoS','DDoS Protection'],['Bantuan 24 Jam','24h Support']],['Perawatan Website','Website Maintenance']]];
+Object.assign(OPT, {
+cSubject:[['Landing Page Fokus Konversi','Conversion-Focused Landing Page'],['Website Perusahaan (Company Profile)','Company Website (Company Profile)'],['Top Up Game / Toko Online','Game Top-Up / Online Store'],['Sistem LMS / Web App Kustom','LMS / Custom Web App'],['Audit Performa & PageSpeed','Performance Audit & PageSpeed'],['Kebutuhan Lainnya','Other Needs']],
+cBudget:[['Rp 1,5 jt – Rp 3 jt','Rp 1.5 – 3 million'],['Rp 3 jt – Rp 6 jt','Rp 3 – 6 million'],['Rp 6 jt – Rp 15 jt','Rp 6 – 15 million'],['> Rp 15 jt','> Rp 15 million']]});
+const FSVC = [[['Website Perusahaan','Company Website'],'/services#web-perusahaan'],[['Landing Page Konversi','Conversion Landing Page'],'/services#landing-page'],[['Top Up Game & E-Commerce','Game Top-Up & E-Commerce'],'/services#topup-ecommerce'],[['Sistem LMS & Web App','LMS & Web Apps'],'/services#lms-custom'],[['Audit Performa & Speed SEO','Performance Audit & Speed SEO'],'/services#speed-seo']];
 const ck = '<svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>';
 const star = '<svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>';
 const U = (id, w, q) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=${q}`;
@@ -183,7 +230,7 @@ function render() {
   $('#nav').innerHTML = NAV.map(([n, h]) => `<a href="${h}" class="${nc(h)} transition-colors">${t(n)}</a>`).join('');
   $('#mnav').innerHTML = NAV.map(([n, h]) => `<a href="${h}" class="py-1.5 ${nc(h)} block">${t(n)}</a>`).join('') + `<a href="/contact" class="btn btn-dark justify-center mt-2">${t(D.consult)}</a>`;
   $('#fnav').innerHTML = NAV.map(([n, h]) => `<li><a class="hover:text-ink" href="${h}">${t(n)}</a></li>`).join('');
-  $('#fsvc').innerHTML = SVC.map(s => `<li><a class="hover:text-ink" href="/#layanan">${t(s[0])}</a></li>`).join('');
+  $('#fsvc').innerHTML = FSVC.map(([n, h]) => `<li><a class="hover:text-ink" href="${h}">${t(n)}</a></li>`).join('');
   $('#stats').innerHTML = STATS.map(([v, dec, u, l], i) => `<div class="py-6 pr-4 rv" ${dly(i)}><dd class="display text-3xl md:text-5xl" data-n="${v}" data-dec="${dec}" data-suf="${t(u)}">${v}${t(u)}</dd><dt class="mt-2 text-xs text-zinc-500">${t(l)}</dt></div>`).join('');
   $('#brands').innerHTML = BRANDS.map(([n, c, p]) => `<div class="flex items-center gap-2 hover:text-zinc-900 transition-colors cursor-default group" title="${n}"><svg class="w-4 h-4 text-zinc-400 group-hover:text-zinc-900 transition-colors shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${p}</svg><span class="${c} text-zinc-500 group-hover:text-zinc-900 transition-colors">${n}</span></div>`).join('');
   $('#services').innerHTML = SVC.map(([n, d, g], i) => `<article class="p-8 border-r border-b border-zinc-200 hover:bg-zinc-50 transition-colors flex flex-col gap-4 rv" ${dly(i % 3)}><span class="font-mono text-xs text-zinc-400">${String(i + 1).padStart(2, '0')}</span><h3 class="text-xl font-bold">${t(n)}</h3><p class="text-sm text-zinc-600 leading-relaxed grow">${t(d)}</p><div class="flex flex-wrap gap-2 pt-2">${g.map(x => `<span class="px-2 py-1 border border-zinc-300 rounded text-[10px] font-semibold uppercase tracking-wider">${t(x)}</span>`).join('')}</div><a class="text-xs font-bold hover:underline" target="_blank" rel="noopener" href="${waMsg('Halo Lanz Dev, saya tertarik dengan layanan ' + t(n) + '.', 'Hello Lanz Dev, I am interested in your ' + t(n) + ' service.')}">${lang === 'id' ? 'Tanya layanan ini →' : 'Ask about this service →'}</a></article>`).join('');
@@ -221,6 +268,8 @@ function render() {
   plans();
   $('#faqs').innerHTML = FAQ.map(([q, a]) => `<details class="border-b border-zinc-200 py-5"><summary class="flex items-center justify-between gap-4 font-semibold text-sm">${t(q)}<span class="plus text-xl transition-transform">+</span></summary><p class="pt-3 text-sm text-zinc-600 leading-relaxed max-w-2xl">${t(a)}</p></details>`).join('');
   for (const k in OPT) { const s = $('#' + k), v = s.selectedIndex > 0 ? s.selectedIndex : 0; s.innerHTML = OPT[k].map(o => `<option>${t(o)}</option>`).join(''); s.selectedIndex = v; }
+  $('#svc6').innerHTML = SV.map(([id, tag, n, d, g, w], i) => `<article id="${id}" class="p-8 border border-zinc-200 rounded-xl bg-white hover:border-zinc-900 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between space-y-6 rv" ${dly(i % 3)}><div class="space-y-4"><span class="font-mono text-xs text-zinc-400">${tag}</span><h2 class="text-xl font-bold text-zinc-900">${t(n)}</h2><p class="text-xs text-zinc-600 leading-relaxed">${t(d)}</p><div class="flex flex-wrap gap-1.5 pt-1">${g.map(x => `<span class="px-2 py-0.5 border border-zinc-200 rounded text-[10px] font-semibold text-zinc-700 bg-zinc-50">${t(x)}</span>`).join('')}</div></div><a href="${waMsg('Halo Lanz Dev, saya tertarik dengan layanan ' + w[0] + '.', 'Hello Lanz Dev, I am interested in your ' + w[1] + ' service.')}" target="_blank" rel="noopener" class="text-xs font-bold text-zinc-900 hover:underline inline-flex items-center gap-1">${lang === 'id' ? 'Konsultasi Layanan Ini →' : 'Consult This Service →'}</a></article>`).join('');
+  $('#pplans').innerHTML = PLANS.map((p, i) => `<div class="rounded-2xl border ${p.hot ? 'border-2 border-zinc-900 shadow-xl relative' : 'border-zinc-200 shadow-xs'} p-8 flex flex-col justify-between gap-8 bg-white hover:-translate-y-1 transition-transform duration-300 rv" ${dly(i)}>${p.hot ? `<span class="absolute -top-3.5 right-6 px-3 py-1 rounded-full text-[10px] font-bold bg-ink text-white uppercase tracking-wider">${lang === 'id' ? 'Paling Populer' : 'Most Popular'}</span>` : ''}<div class="space-y-5"><div><h3 class="text-lg font-bold text-zinc-900">${t(p.n)}</h3><p class="text-xs text-zinc-500 mt-1 leading-relaxed">${t(p.d)}</p></div><div class="border-y border-zinc-200 py-4"><div class="font-mono text-3xl font-bold text-zinc-900">${rp(p.p)}</div><div class="text-[11px] text-zinc-500 mt-2 flex items-center justify-between gap-2"><span>${t(p.note)}</span><span class="font-mono font-semibold text-zinc-700 bg-zinc-100 px-2 py-0.5 rounded shrink-0 inline-flex items-center gap-1.5"><svg class="w-3 h-3 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>${t(p.time)}</span></div></div><ul class="space-y-3 text-xs text-zinc-700">${p.f.map(x => `<li class="flex items-center gap-2">${ck}<span>${t(x)}</span></li>`).join('')}</ul></div><a target="_blank" rel="noopener" href="${waMsg('Halo Lanz Dev, saya ingin memesan paket ' + t(p.n) + ' (' + rp(p.p) + ').', 'Hello Lanz Dev, I would like to order the ' + t(p.n) + ' package (' + rp(p.p) + ').')}" class="btn justify-center ${p.hot ? 'btn-dark' : 'btn-line'}">${t(p.cta)}</a></div>`).join('');
   $('#aWa').href = waMsg('Halo Mas Bagus, saya ingin konsultasi proyek.', 'Hello Bagus, I would like to discuss a project.');
   $('#ctaWa').href = waMsg('Halo Lanz Dev, saya ingin konsultasi.', 'Hello Lanz Dev, I would like a consultation.');
   if ($('#faqs').style && document.getElementById('faqs')) {
@@ -281,6 +330,12 @@ $('#wa-form').addEventListener('submit', e => {
   e.preventDefault();
   const f = Object.fromEntries(new FormData(e.target)), id = lang === 'id';
   const m = [id ? 'Halo Lanz Dev, saya ingin berkonsultasi.' : 'Hello Lanz Dev, I would like a consultation.', '', (id ? 'Nama: ' : 'Name: ') + f.name, f.email && 'Email: ' + f.email, f.phone && 'WhatsApp: ' + f.phone, (id ? 'Kebutuhan: ' : 'Needs: ') + f.subject, (id ? 'Anggaran: ' : 'Budget: ') + f.budget, (id ? 'Target selesai: ' : 'Deadline: ') + f.deadline, '', id ? 'Pesan:' : 'Message:', f.message].filter(x => x !== undefined && x !== false && x !== null).join('\n');
+  window.open(wa(m), '_blank', 'noopener');
+});
+$('#contact-page-form').addEventListener('submit', e => {
+  e.preventDefault();
+  const f = Object.fromEntries(new FormData(e.target)), id = lang === 'id';
+  const m = [id ? 'Halo Lanz Dev, saya ingin berkonsultasi mengenai proyek website.' : 'Hello Lanz Dev, I would like to consult about a website project.', '', (id ? '*Nama:* ' : '*Name:* ') + f.name, '*WhatsApp:* ' + f.phone, (id ? '*Kebutuhan:* ' : '*Needs:* ') + f.subject, (id ? '*Anggaran:* ' : '*Budget:* ') + f.budget, '', id ? '*Pesan / Deskripsi:*' : '*Message / Description:*', f.message].join('\n');
   window.open(wa(m), '_blank', 'noopener');
 });
 render(); first = false;
