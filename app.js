@@ -1,6 +1,9 @@
 (() => {
 'use strict';
-const $ = s => document.querySelector(s), WA = '628567325691';
+const nul = () => ({ style: {}, classList: { add() {}, remove() {}, toggle() {}, contains: () => false }, setAttribute() {}, addEventListener() {} });
+const $ = s => document.querySelector(s) || nul(), WA = '628567325691';
+const PG = document.body.dataset.page || 'home';
+const cur = location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 let lang = 'id', first = true, yearly = 0;
 try { lang = localStorage.getItem('lz-lang') || ((navigator.language || 'id').toLowerCase().startsWith('id') ? 'id' : 'en'); } catch (e) {}
@@ -59,10 +62,31 @@ fAbout:['Studio desain dan pengembangan digital independen. Dibangun dengan pres
 fNav:['Navigasi','Navigation'], fSvc:['Layanan','Services'], fCon:['Hubungi','Contact'],
 copy:['© 2026 Lanz Dev. Hak Cipta Dilindungi Undang-Undang.','© 2026 Lanz Dev. All rights reserved.'], top:['Kembali ke atas ↑','Back to top ↑']
 };
-const META = {
+const META_HOME = {
 title:['Lanz Dev — Jasa Pembuatan Website & Pengembangan Digital Profesional Indonesia','Lanz Dev — Professional Website Development & Digital Studio in Indonesia'],
 desc:['Lanz Dev adalah studio web development profesional independen di Depok, Jawa Barat, oleh M. Bagus Erlangga. Jasa pembuatan website perusahaan, landing page, toko online, web top up game otomatis, sistem LMS, dan web app Laravel kustom.','Lanz Dev is an independent professional web development studio in Depok, West Java, by M. Bagus Erlangga. Company websites, landing pages, online stores, automated game top-up sites, LMS platforms, and custom Laravel web apps.']
 };
+
+const META_ABOUT = {
+title:['Tentang Kami — Lanz Dev | Profil M. Bagus Erlangga','About Us — Lanz Dev | M. Bagus Erlangga Profile'],
+desc:['Kenali Lanz Dev, studio pengembangan digital independen di Depok yang dipimpin oleh M. Bagus Erlangga. Membangun website performa tinggi dengan dedikasi langsung tanpa perantara.','Meet Lanz Dev, an independent digital development studio in Depok led by M. Bagus Erlangga. Building high-performance websites with direct dedication and no middlemen.']
+};
+const META = { home: META_HOME, about: META_ABOUT };
+Object.assign(D, {
+aEye:['Tentang Studio & Pendiri','About the Studio & Founder'],
+aH1:['Dedikasi langsung, tanpa perantara birokratis<span class="text-blue">.</span>','Direct dedication, no bureaucratic middlemen<span class="text-blue">.</span>'],
+aP:['Lanz Dev didirikan oleh <strong>M. Bagus Erlangga</strong> atas keyakinan bahwa website terbaik lahir dari komunikasi transparan dan eksekusi teknis yang presisi.','Lanz Dev was founded by <strong>M. Bagus Erlangga</strong> on the belief that the best websites come from transparent communication and precise technical execution.'],
+aLoc:['Indonesia, Depok','Depok, Indonesia'], aRem:['Remote Worldwide','Remote Worldwide'],
+aH2:['Membangun infrastruktur web modern yang andal, scalable, dan estetik.','Building reliable, scalable, and aesthetic modern web infrastructure.'],
+aBody:['Dengan pengalaman lebih dari 8 tahun dalam arsitektur web modern, saya telah mengembangkan berbagai platform digital: mulai dari toko online top-up game otomatis dengan volume ribuan transaksi (<a href="https://www.lanzstoreid.com" target="_blank" rel="noopener" class="text-ink font-semibold underline">Lanz Store ID</a>), learning management system interaktif (<a href="https://becoding.onlinet.id" target="_blank" rel="noopener" class="text-ink font-semibold underline">Becoding LMS</a>), hingga website profil perusahaan agrikultur terkemuka (<a href="https://www.agrilinkteknologisolusi.co.id/" target="_blank" rel="noopener" class="text-ink font-semibold underline">Agrilink Teknologi</a>).','With more than 8 years of experience in modern web architecture, I have built a range of digital platforms: from an automated game top-up store handling thousands of transactions (<a href="https://www.lanzstoreid.com" target="_blank" rel="noopener" class="text-ink font-semibold underline">Lanz Store ID</a>), an interactive learning management system (<a href="https://becoding.onlinet.id" target="_blank" rel="noopener" class="text-ink font-semibold underline">Becoding LMS</a>), to the company profile of a leading agriculture company (<a href="https://www.agrilinkteknologisolusi.co.id/" target="_blank" rel="noopener" class="text-ink font-semibold underline">Agrilink Teknologi</a>).'],
+aS1v:['8+ Thn','8+ Yrs'], aS1:['Pengalaman Digital','Digital Experience'], aS2:['Website Selesai','Websites Delivered'], aS3:['Komitmen Deadline','Deadline Commitment'],
+aCta:['Konsultasi Langsung dengan Founder →','Talk Directly with the Founder →'],
+aPe:['Prinsip Fundamental','Core Principles'], aPh:['Mengapa bekerja sama dengan Lanz Dev','Why work with Lanz Dev'],
+p1t:['Presisi Tipografi & Grid','Typography & Grid Precision'], p1d:['Setiap margin, proporsi teks, dan elemen UI dipandu sistem grid Swiss yang ketat.','Every margin, text proportion, and UI element is guided by a strict Swiss grid system.'],
+p2t:['Kecepatan & Performa','Speed & Performance'], p2d:['Website dimuat di bawah 500 milidetik dengan skor PageSpeed 90+ dan CDN Cloudflare teroptimasi.','Websites load in under 500 milliseconds with a PageSpeed score of 90+ and an optimized Cloudflare CDN.'],
+p3t:['Kepemilikan Penuh 100%','100% Full Ownership'], p3d:['Source code, lisensi domain, dan aset digital diserahkan utuh kepada Anda tanpa vendor-lock.','Source code, domain licenses, and digital assets are handed over to you in full, with no vendor lock-in.'],
+p4t:['Garansi & Support Nyata','Real Warranty & Support'], p4d:['Pendampingan teknis gratis 30–60 hari pasca rilis untuk memastikan operasional Anda lancar.','Free technical support for 30–60 days after launch to keep your operations running smoothly.']
+});
 
 /* ---------- DATA [id, en] ---------- */
 const NAV = [[['Beranda','Home'],'/'],[['Layanan','Services'],'/services'],[['Studio & Tim','Studio & Team'],'/about'],[['Portofolio','Portfolio'],'/#karya'],[['Paket Harga','Pricing'],'/pricing'],[['Testimoni','Testimonials'],'/#testimoni'],[['FAQ','FAQ'],'/#faq'],[['Kontak','Contact'],'/contact']];
@@ -149,13 +173,15 @@ const waMsg = (id, en) => wa(lang === 'id' ? id : en);
 /* ---------- RENDER ---------- */
 function render() {
   document.documentElement.lang = lang;
-  document.title = t(META.title);
-  $('meta[name=description]').content = t(META.desc);
+  const M = META[PG] || META.home;
+  document.title = t(M.title);
+  $('meta[name=description]').content = t(M.desc);
   document.querySelectorAll('[data-i]').forEach(e => e.innerHTML = t(D[e.dataset.i]));
   document.querySelectorAll('[data-p]').forEach(e => e.placeholder = t(D[e.dataset.p]));
   $('#lang').innerHTML = `<span class="${lang === 'id' ? 'text-ink' : 'text-zinc-400'}">ID</span><span class="text-zinc-300 mx-1">|</span><span class="${lang === 'en' ? 'text-ink' : 'text-zinc-400'}">EN</span>`;
-  $('#nav').innerHTML = NAV.map(([n, h]) => `<a href="${h}" class="hover:text-ink transition-colors">${t(n)}</a>`).join('');
-  $('#mnav').innerHTML = NAV.map(([n, h]) => `<a href="${h}" class="py-1.5 hover:text-ink block">${t(n)}</a>`).join('') + `<a href="/contact" class="btn btn-dark justify-center mt-2">${t(D.consult)}</a>`;
+  const nc = h => h === cur ? 'text-ink font-bold' : 'hover:text-ink';
+  $('#nav').innerHTML = NAV.map(([n, h]) => `<a href="${h}" class="${nc(h)} transition-colors">${t(n)}</a>`).join('');
+  $('#mnav').innerHTML = NAV.map(([n, h]) => `<a href="${h}" class="py-1.5 ${nc(h)} block">${t(n)}</a>`).join('') + `<a href="/contact" class="btn btn-dark justify-center mt-2">${t(D.consult)}</a>`;
   $('#fnav').innerHTML = NAV.map(([n, h]) => `<li><a class="hover:text-ink" href="${h}">${t(n)}</a></li>`).join('');
   $('#fsvc').innerHTML = SVC.map(s => `<li><a class="hover:text-ink" href="/#layanan">${t(s[0])}</a></li>`).join('');
   $('#stats').innerHTML = STATS.map(([v, dec, u, l], i) => `<div class="py-6 pr-4 rv" ${dly(i)}><dd class="display text-3xl md:text-5xl" data-n="${v}" data-dec="${dec}" data-suf="${t(u)}">${v}${t(u)}</dd><dt class="mt-2 text-xs text-zinc-500">${t(l)}</dt></div>`).join('');
@@ -195,10 +221,12 @@ function render() {
   plans();
   $('#faqs').innerHTML = FAQ.map(([q, a]) => `<details class="border-b border-zinc-200 py-5"><summary class="flex items-center justify-between gap-4 font-semibold text-sm">${t(q)}<span class="plus text-xl transition-transform">+</span></summary><p class="pt-3 text-sm text-zinc-600 leading-relaxed max-w-2xl">${t(a)}</p></details>`).join('');
   for (const k in OPT) { const s = $('#' + k), v = s.selectedIndex > 0 ? s.selectedIndex : 0; s.innerHTML = OPT[k].map(o => `<option>${t(o)}</option>`).join(''); s.selectedIndex = v; }
+  $('#aWa').href = waMsg('Halo Mas Bagus, saya ingin konsultasi proyek.', 'Hello Bagus, I would like to discuss a project.');
   $('#ctaWa').href = waMsg('Halo Lanz Dev, saya ingin konsultasi.', 'Hello Lanz Dev, I would like a consultation.');
-  const ld = $('#faq-ld') || Object.assign(document.createElement('script'), { id: 'faq-ld', type: 'application/ld+json' });
+  if ($('#faqs').style && document.getElementById('faqs')) {
+  const ld = document.getElementById('faq-ld') || Object.assign(document.createElement('script'), { id: 'faq-ld', type: 'application/ld+json' });
   ld.textContent = JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage', inLanguage: lang === 'id' ? 'id-ID' : 'en-US', mainEntity: FAQ.map(([q, a]) => ({ '@type': 'Question', name: t(q), acceptedAnswer: { '@type': 'Answer', text: t(a) } })) });
-  document.head.appendChild(ld);
+  document.head.appendChild(ld); }
   if (!first) document.querySelectorAll('.rv').forEach(e => e.classList.add('in'));
   else watch();
 }
