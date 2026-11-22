@@ -1,0 +1,35 @@
+Options -MultiViews
+RewriteEngine On
+
+# 1. Force HTTPS + www
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule ^ https://www.lanzdev.my.id%{REQUEST_URI} [L,R=301]
+
+# 2. /index.html -> /
+RewriteCond %{THE_REQUEST} \s/index\.html[\s?] [NC]
+RewriteRule ^ / [R=301,L]
+
+# 3. /about.html -> /about (301, for SEO)
+RewriteCond %{THE_REQUEST} \s/+([^\s?]+?)\.html[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+# 4. Serve /about from about.html internally
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^([^/]+)/?$ $1.html [L]
+
+# Performance: compression + caching
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript application/json image/svg+xml
+</IfModule>
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 1 week"
+  ExpiresByType application/javascript "access plus 1 week"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
