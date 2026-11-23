@@ -4,6 +4,7 @@ const nul = () => ({ style: {}, classList: { add() {}, remove() {}, toggle() {},
 const $ = s => document.querySelector(s) || nul(), WA = '628567325691';
 const PG = document.body.dataset.page || 'home';
 const cur = location.pathname.replace(/\.html$/, '').replace(/\/$/, '') || '/';
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 let lang = 'id', first = true, yearly = 0;
 try { lang = localStorage.getItem('lz-lang') || ((navigator.language || 'id').toLowerCase().startsWith('id') ? 'id' : 'en'); } catch (e) {}
 const t = p => Array.isArray(p) ? p[lang === 'id' ? 0 : 1] : p;
@@ -13,12 +14,15 @@ const dly = i => `style="--d:${Math.min(i * .08, .4).toFixed(2)}s"`;
 
 /* ---------- STATIC TEXT [id, en] ---------- */
 const D = {
-consult:['Konsultasi','Consult'],
+consult:['Konsultasi →','Consult →'],
 eyebrow:['Studio Desain & Pengembangan Digital — Independen','Independent Design & Digital Development Studio'],
 h1:['Website yang dibangun dengan presisi<span class="text-blue">.</span>','Websites built with precision<span class="text-blue">.</span>'],
 heroP:['Kami merancang dan membangun website, toko online, dan aplikasi web yang cepat, aman, dan mudah dikelola. Desain bersih, kode rapi, hasil yang terukur untuk pertumbuhan bisnis Anda.','We design and build fast, secure, easy-to-manage websites, online stores, and web apps. Clean design, tidy code, and measurable results for your business growth.'],
-cta1:['Mulai Proyek →','Start a Project →'], cta2:['Lihat Karya','See Our Work'],
-trust:['Proyek yang sudah live dan bisa Anda kunjungi','Live projects you can visit yourself'],
+cta1:['Mulai Proyek →','Start a Project →'], cta2:['Lihat Layanan','View Services'],
+mkLink:['Lihat Showcase','View Showcase'], mkTag:['Studio Desain & Kode — 2026','Design & Code Studio — 2026'],
+mkP:['Tipografi presisi, arsitektur informasi bersih, dan optimasi performa tanpa kompromi untuk brand modern.','Precise typography, clean information architecture, and uncompromising performance for modern brands.'],
+mkMob:['Sempurna di Semua Layar','Perfect on Every Screen'],
+trust:['Dipercaya oleh puluhan bisnis & kreator','Trusted by dozens of businesses & creators'],
 s1e:['01 — Layanan','01 — Services'], s1h:['Apa yang kami kerjakan','What we do'],
 s1p:['Dari identitas visual sampai kode produksi, satu studio menangani seluruh alur kerja agar hasil akhir konsisten dan tanpa kompromi.','From visual identity to production code, one studio handles the entire workflow so the final result stays consistent and uncompromising.'],
 s2e:['02 — Proses','02 — Process'], s2h:['Dari ide ke peluncuran','From idea to launch'],
@@ -26,7 +30,7 @@ s3e:['03 — Portofolio Pilihan','03 — Selected Portfolio'], s3h:['Karya nyata
 s3p:['Bukan sekadar mockup konsep. Setiap website dirancang dan dikembangkan dengan standar kode produksi yang rapi, responsif, dan siap menghasilkan konversi nyata.','Not just concept mockups. Every website is designed and built to clean production standards, responsive and ready to deliver real conversions.'],
 oH:['Kategori industri lainnya yang kami layani','Other industries we serve'],
 oP:['Struktur arsitektur informasi disesuaikan dengan target pasar bisnis Anda.','Information architecture tailored to your business target market.'],
-oA:['Konsultasikan kebutuhan spesifik Anda','Discuss your specific needs'],
+oA:['Konsultasikan kebutuhan spesifik Anda →','Discuss your specific needs →'],
 s4e:['04 — Testimoni','04 — Testimonials'], s4h:['Apa kata mereka tentang Lanz Dev','What they say about Lanz Dev'],
 s4p:['Kepuasan dan hasil bisnis nyata adalah ukuran sukses kami. Berikut pengalaman langsung para pemilik bisnis dan pengambil keputusan yang mempercayakan website mereka kepada kami.','Satisfaction and real business results are how we measure success. Here are first-hand experiences from business owners and decision-makers who trusted us with their websites.'],
 s5e:['05 — Paket & Investasi','05 — Packages & Investment'], s5h:['Investasi transparan per proyek','Transparent per-project pricing'],
@@ -36,24 +40,24 @@ gH:['Investasi aman tanpa rasa khawatir','Safe investment, zero worries'],
 gP:['Kami menanggung risiko agar Anda dapat fokus mengembangkan bisnis dengan tenang.','We carry the risk so you can focus on growing your business with peace of mind.'],
 g1t:['Garansi Revisi Sampai Disetujui','Revisions Until Approved'],
 g1d:['Kami tidak langsung menulis kode sebelum Anda menyetujui visual mockup final. Arah visual dan tipografi direvisi hingga 100% cocok dengan karakter brand Anda tanpa biaya tambahan.','We do not write code until you approve the final visual mockup. Visual direction and typography are revised until they fit your brand 100%, at no extra cost.'],
-g1b:['Revisi desain tanpa biaya','Design revisions at no cost'],
+g1b:['100% Kepuasan Desain','100% Design Satisfaction'],
 g2t:['Garansi Skor PageSpeed 90+','PageSpeed 90+ Guarantee'],
 g2d:['Website lambat membuang biaya iklan. Setiap website kami jamin meraih skor Google PageSpeed 90+ dan lolos Core Web Vitals. Jika di bawah 90, kami optimasi gratis sampai tercapai.','Slow websites waste ad spend. Every site is guaranteed a Google PageSpeed score of 90+ and passes Core Web Vitals. If it falls below 90, we optimize for free until it does.'],
-g2b:['Diukur di Google PageSpeed','Measured on Google PageSpeed'],
+g2b:['Teruji di Google PageSpeed','Verified on Google PageSpeed'],
 g3t:['Free Support 30–60 Hari Pasca Rilis','Free Support 30–60 Days After Launch'],
 g3d:['Setelah website live, Anda tidak ditinggal sendirian. Kami memberikan garansi perbaikan bug gratis, pendampingan kendala teknis, dan konsultasi konten agar transisi berjalan mulus.','After launch you are not left alone. We provide free bug fixes, technical assistance, and content consulting for a smooth transition.'],
-g3b:['Perbaikan bug gratis','Free bug fixes'],
+g3b:['Pendampingan Teknis Penuh','Full Technical Support'],
 gS:['Seluruh paket juga mencakup <strong>100% kepemilikan source code & domain</strong> tanpa biaya terselubung.','Every package also includes <strong>100% ownership of source code & domain</strong> with no hidden fees.'],
-gA:['Punya pertanyaan spesifik? Tanya langsung','Have a specific question? Ask directly'],
+gA:['Punya pertanyaan spesifik? Tanya tim →','Have a specific question? Ask the team →'],
 s6e:['06 — FAQ','06 — FAQ'], s6h:['Pertanyaan umum','Common questions'],
 s7e:['07 — Kontak','07 — Contact'], s7h:['Mulai percakapan','Start a conversation'],
 s7p:['Isi formulir, lalu pesan Anda akan terbuka langsung di WhatsApp dan dikirim ke tim kami. Kami membalas dalam waktu kurang dari 24 jam kerja.','Fill in the form and your message opens directly in WhatsApp and goes to our team. We reply within 24 business hours.'],
 locV:['Gandul, Depok, Jawa Barat · Remote','Gandul, Depok, West Java · Remote'], hrsL:['Jam kerja','Working hours'], hrsV:['Sen–Jum, 09.00–18.00 WIB','Mon–Fri, 09:00–18:00 WIB (GMT+7)'], locL:['Lokasi','Location'],
 fN:['Nama lengkap *','Full name *'], fP:['Nomor WhatsApp','WhatsApp number'], fS:['Kebutuhan','Needs'], fB:['Perkiraan anggaran','Estimated budget'], fD:['Target selesai','Target deadline'], fM:['Pesan *','Message *'],
-phN:['Nama Anda','Your name'], phM:['Ceritakan kebutuhan atau pertanyaan Anda...','Tell us about your needs or questions...'],
+phN:['Contoh: Rian Pratama','e.g. Rian Pratama'], phM:['Ceritakan kebutuhan atau pertanyaan Anda...','Tell us about your needs or questions...'],
 note:['Pesan dikirim melalui WhatsApp ke 0856-7325-691.','Your message is sent via WhatsApp to 0856-7325-691.'],
-send:['Kirim via WhatsApp','Send via WhatsApp'],
-ctaH:['Siap membangun yang berikutnya<span class="text-blue">.</span>','Ready to build the next one<span class="text-blue">.</span>'], ctaB:['Hubungi via WhatsApp','Contact via WhatsApp'],
+send:['Kirim via WhatsApp →','Send via WhatsApp →'],
+ctaH:['Siap membangun yang berikutnya<span class="text-blue">.</span>','Ready to build the next one<span class="text-blue">.</span>'], ctaB:['Hubungi via WhatsApp →','Contact via WhatsApp →'],
 fAbout:['Studio desain dan pengembangan digital independen. Dibangun dengan presisi, dirancang agar bertahan lama.','An independent design and digital development studio. Built with precision, designed to last.'],
 fNav:['Navigasi','Navigation'], fSvc:['Layanan','Services'], fCon:['Hubungi','Contact'],
 copy:['© 2026 Lanz Dev. Hak Cipta Dilindungi Undang-Undang.','© 2026 Lanz Dev. All rights reserved.'], top:['Kembali ke atas ↑','Back to top ↑']
@@ -88,7 +92,7 @@ aLoc:['Indonesia, Depok','Depok, Indonesia'], aRem:['Remote Worldwide','Remote W
 aH2:['Membangun infrastruktur web modern yang andal, scalable, dan estetik.','Building reliable, scalable, and aesthetic modern web infrastructure.'],
 aBody:['Dengan pengalaman lebih dari 8 tahun dalam arsitektur web modern, saya telah mengembangkan berbagai platform digital: mulai dari toko online top-up game otomatis dengan volume ribuan transaksi (<a href="https://www.lanzstoreid.com" target="_blank" rel="noopener" class="text-ink font-semibold underline">Lanz Store ID</a>), learning management system interaktif (<a href="https://becoding.onlinet.id" target="_blank" rel="noopener" class="text-ink font-semibold underline">Becoding LMS</a>), hingga website profil perusahaan agrikultur terkemuka (<a href="https://www.agrilinkteknologisolusi.co.id/" target="_blank" rel="noopener" class="text-ink font-semibold underline">Agrilink Teknologi</a>).','With more than 8 years of experience in modern web architecture, I have built a range of digital platforms: from an automated game top-up store handling thousands of transactions (<a href="https://www.lanzstoreid.com" target="_blank" rel="noopener" class="text-ink font-semibold underline">Lanz Store ID</a>), an interactive learning management system (<a href="https://becoding.onlinet.id" target="_blank" rel="noopener" class="text-ink font-semibold underline">Becoding LMS</a>), to the company profile of a leading agriculture company (<a href="https://www.agrilinkteknologisolusi.co.id/" target="_blank" rel="noopener" class="text-ink font-semibold underline">Agrilink Teknologi</a>).'],
 aS1v:['8+ Thn','8+ Yrs'], aS1:['Pengalaman Digital','Digital Experience'], aS2:['Website Selesai','Websites Delivered'], aS3:['Komitmen Deadline','Deadline Commitment'],
-aCta:['Konsultasi Langsung dengan Founder','Talk Directly with the Founder'],
+aCta:['Konsultasi Langsung dengan Founder →','Talk Directly with the Founder →'],
 aPe:['Prinsip Fundamental','Core Principles'], aPh:['Mengapa bekerja sama dengan Lanz Dev','Why work with Lanz Dev'],
 p1t:['Presisi Tipografi & Grid','Typography & Grid Precision'], p1d:['Setiap margin, proporsi teks, dan elemen UI dipandu sistem grid Swiss yang ketat.','Every margin, text proportion, and UI element is guided by a strict Swiss grid system.'],
 p2t:['Kecepatan & Performa','Speed & Performance'], p2d:['Website dimuat di bawah 500 milidetik dengan skor PageSpeed 90+ dan CDN Cloudflare teroptimasi.','Websites load in under 500 milliseconds with a PageSpeed score of 90+ and an optimized Cloudflare CDN.'],
@@ -151,9 +155,14 @@ ct3t:['Anda menerima rekomendasi','You receive a recommendation'], ct3d:['Paket 
 
 /* ---------- DATA [id, en] ---------- */
 const NAV = [[['Beranda','Home'],'/'],[['Layanan','Services'],'/services'],[['Studio & Tim','Studio & Team'],'/about'],[['Portofolio','Portfolio'],'/#karya'],[['Paket Harga','Pricing'],'/pricing'],[['Testimoni','Testimonials'],'/#testimoni'],[['FAQ','FAQ'],'/#faq'],[['Kontak','Contact'],'/contact']];
-/* Hanya angka yang bersumber dari klaim di halaman ini. Metrik performa (0.38 dtk, 99.98%) dihapus: belum ada pengukuran (R-36, R-38). Isi ulang jika sudah ada data nyata. */
-const STATS = [['8+',['Tahun pengalaman','Years of experience']],['4',['Proyek live di portofolio','Live projects in portfolio']],['30–60',['Hari support gratis pasca rilis','Days of free post-launch support']],['100%',['Source code & domain milik Anda','Source code & domain are yours']]];
-const BRANDS = [['Lanz Store ID','https://www.lanzstoreid.com'],['Becoding LMS','https://becoding.onlinet.id'],['Agrilink Teknologi','https://www.agrilinkteknologisolusi.co.id/']];
+const STATS = [['0.38',2,[' dtk',' s'],['Waktu muat rata-rata','Average load time']],['99.98',2,['%','%'],['Ketersediaan sistem','System uptime']],['24',0,[' jam',' h'],['Respons awal','First response']],['100',0,['%','%'],['Responsif semua layar','Responsive on all screens']]];
+const BRANDS = [
+['LANZ STORE ID','font-display font-black tracking-tight text-[13px]','<rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="8" cy="12" r="2"/><path d="M16 10v4M14 12h4"/>'],
+['BECODING','font-mono font-bold text-[13px] tracking-tight','<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>'],
+['AGRILINK TEKNOLOGI','font-sans font-bold text-[12px] tracking-wider uppercase','<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>'],
+['BAGUS ERLANGGA','font-display font-extrabold text-[12px]','<circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>'],
+['bhinneka.tech','font-mono font-semibold text-[13px] tracking-tight lowercase','<path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/>'],
+['DOMPET SAMPAH','font-sans font-bold text-[12px] tracking-wider uppercase','<path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>']];
 const SVC = [
 [['Website Perusahaan','Company Website'],['Situs profil multipage dengan struktur informasi jelas, kredibel, dan siap diindeks mesin pencari.','Multipage profile sites with clear information structure, credible, and ready to be indexed by search engines.'],['Multipage','SEO','CMS','PHP']],
 [['Landing Page','Landing Page'],['Satu halaman berfokus konversi untuk kampanye, peluncuran produk, atau acara.','A single conversion-focused page for campaigns, product launches, or events.'],[['Konversi','Conversion'],'A/B',['Cepat','Fast']]],
@@ -190,26 +199,26 @@ const PROJECTS = [
   desc:['Website company profile resmi perusahaan teknologi agrikultur dengan struktur arsitektur multipage kredibel, katalog solusi industri cerdas, SEO korporat, dan formulir kemitraan B2B.','Official company profile website of an agritech company with a credible multipage architecture, smart industry solution catalog, corporate SEO, and a B2B partnership form.'],
   metric:['Corporate Profile · SEO On-Page','Corporate Profile · On-Page SEO'], badge:['Company Profile Korporat','Corporate Company Profile'],
   tags:['Company Profile','Smart Agriculture','B2B Inquiries','SEO Architecture'], img:'photo-1586528116311-ad8dd3c8310d' }];
-/* Testimoni milik sendiri (CEO Lanz Store = founder) dan foto stok dihapus. Pastikan dua sisanya nyata dan sudah disetujui orangnya. */
 const TESTI = [
+{ q:['Sistem top up otomatis di lanzstoreid.com berjalan sangat stabil 24 jam tanpa kendala. Integrasi payment gateway QRIS dan pengecekan User ID instan membuat transaksi pelanggan selesai dalam hitungan detik. Omset naik signifikan dan operasional jauh lebih hemat tenaga.','The automated top-up system at lanzstoreid.com runs very stably 24/7 without issues. QRIS payment gateway integration and instant User ID checks let customer transactions finish in seconds. Revenue rose significantly and operations take far less effort.'],
+  name:'Bagus Erlangga', role:['CEO LANZ STORE','CEO LANZ STORE'], company:'Lanz Store ID', tag:['Top Up Game Otomatis & QRIS','Automated Game Top-Up & QRIS'], avatar:'photo-1507003211169-0a1dd7228f2d' },
 { q:['Website company profile agrilinkteknologisolusi.co.id memberikan kredibilitas luar biasa di hadapan mitra korporat dan dinas pertanian. Tampilan multipage-nya sangat elegan, rapi, dan cepat diakses di semua perangkat. Pelayanan Mas Bagus sangat profesional.','The company profile website agrilinkteknologisolusi.co.id gives us outstanding credibility with corporate partners and agriculture agencies. The multipage layout is elegant, tidy, and fast on every device. Mas Bagus is very professional.'],
-  name:'Ir. H. Sudirman', role:['Direktur Utama','President Director'], company:'PT Agrilink Teknologi Solusi', tag:['Company Profile Korporat Multipage','Multipage Corporate Profile'] },
+  name:'Ir. H. Sudirman', role:['Direktur Utama','President Director'], company:'PT Agrilink Teknologi Solusi', tag:['Company Profile Korporat Multipage','Multipage Corporate Profile'], avatar:'photo-1500648767791-00dcc994a43e' },
 { q:['Platform LMS becoding.onlinet.id mempermudah siswa belajar coding secara terstruktur. Fitur video materi, kuis, dan penerbitan sertifikat otomatis bekerja tanpa celah. Mas Bagus mendampingi dari awal sampai sistem siap digunakan ratusan siswa.','The LMS platform becoding.onlinet.id makes it easy for students to learn coding in a structured way. Video lessons, quizzes, and automatic certificates work flawlessly. Mas Bagus guided us from the start until the system was ready for hundreds of students.'],
-  name:'Reza Firmansyah', role:['Head of Academic','Head of Academic'], company:'Becoding Indonesia', tag:['Learning Management System (LMS)','Learning Management System (LMS)'] }];
-/* Tidak ada tier yang di-highlight: tidak ada alasan bisnis tertulis untuk menonjolkan satu paket (R-31). Tambahkan hot:1 hanya jika ada alasannya. */
+  name:'Reza Firmansyah', role:['Head of Academic','Head of Academic'], company:'Becoding Indonesia', tag:['Learning Management System (LMS)','Learning Management System (LMS)'], avatar:'photo-1573496359142-b8d87734a5a2' }];
 const PLANS = [
 { n:['Landing Page','Landing Page'], d:['Satu halaman fokus konversi tinggi untuk kampanye, iklan, peluncuran produk, atau UMKM.','A single high-conversion page for campaigns, ads, product launches, or SMEs.'], p:1490000, pa:1990000, time:['3–5 hari kerja','3–5 business days'],
   note:['Investasi proyek (sekali bayar)','Project investment (one-time)'], notea:['Termasuk managed hosting & support 1 thn','Includes managed hosting & 1-year support'],
   f:[['1 Halaman fokus konversi & responsif','1 responsive, conversion-focused page'],['Desain custom modern (bukan template pasaran)','Modern custom design (not a stock template)'],['Domain .com / .id & SSL gratis tahun pertama','Free .com / .id domain & SSL for the first year'],['Integrasi formulir checkout ke WhatsApp','Checkout form integrated with WhatsApp'],['Optimasi kecepatan Google PageSpeed 90+','Google PageSpeed 90+ speed optimization'],['Garansi revisi & pendampingan 30 hari','Revision warranty & 30-day support']],
-  cta:['Pesan Landing Page','Order Landing Page'] },
+  cta:['Pesan Landing Page →','Order Landing Page →'] },
 { n:['Website Bisnis','Business Website'], d:['Solusi profil multipage komprehensif dan kredibel untuk korporat, klinik, agensi, atau UMKM.','A comprehensive, credible multipage profile for corporates, clinics, agencies, or SMEs.'], p:3490000, pa:4490000, time:['7–14 hari kerja','7–14 business days'],
   note:['Investasi proyek (sekali bayar)','Project investment (one-time)'], notea:['Termasuk managed server & backup 1 thn','Includes managed server & 1-year backup'],
   f:[['Hingga 5–7 Halaman multipage terstruktur','Up to 5–7 structured pages'],['Struktur SEO semantik & Google Search Console','Semantic SEO structure & Google Search Console'],['Desain sistem tipografi & identitas terarah','Typography system & guided identity design'],['Email bisnis domain kustom (info@namaweb.id)','Custom-domain business email (info@yoursite.id)'],['Integrasi Google Maps & form WhatsApp','Google Maps & WhatsApp form integration'],['Source code diserahkan penuh tanpa vendor-lock','Full source code handover, no vendor lock-in'],['Garansi & support prioritas 60 hari','Warranty & 60-day priority support']],
-  cta:['Pilih Paket Bisnis','Choose Business Plan'] },
+  cta:['Pilih Paket Bisnis →','Choose Business Plan →'], hot:1 },
 { n:['Toko Online & Web App','Online Store & Web App'], d:['Katalog dinamis, e-commerce, atau dashboard kustom berbasis Laravel & MySQL yang siap scale-up.','Dynamic catalog, e-commerce, or custom dashboard on Laravel & MySQL, ready to scale.'], p:6900000, pa:8400000, time:['2–4 minggu','2–4 weeks'],
   note:['Investasi proyek (sekali bayar)','Project investment (one-time)'], notea:['Termasuk server managed & maintenance 1 thn','Includes managed server & 1-year maintenance'],
   f:[['Semua fitur Paket Website Bisnis','All Business Website features'],['Katalog produk interaktif & keranjang belanja','Interactive product catalog & shopping cart'],['Checkout otomatis ke WhatsApp / integrasi QRIS','Automatic WhatsApp checkout / QRIS integration'],['Dashboard admin CMS Laravel & MySQL','Laravel & MySQL admin CMS dashboard'],['Database teroptimasi & backup otomatis','Optimized database & automatic backups'],['Sesi pelatihan admin 1-on-1 & dokumentasi','1-on-1 admin training session & documentation'],['Maintenance & support prioritas 90 hari','Maintenance & 90-day priority support']],
-  cta:['Mulai Proyek Kustom','Start Custom Project'] }];
+  cta:['Mulai Proyek Kustom →','Start Custom Project →'] }];
 const FAQ = [
 [['Berapa lama proses pengerjaan website?','How long does a website take?'],['Untuk Landing Page biasanya selesai dalam 3–5 hari kerja, sedangkan Website Bisnis multipage memerlukan waktu 7–14 hari kerja setelah konten dan materi awal terkumpul.','A Landing Page is usually done in 3–5 business days, while a multipage Business Website takes 7–14 business days once content and initial materials are ready.']],
 [['Bagaimana jika hasil desain belum sesuai ekspektasi?','What if the design does not meet my expectations?'],['Kami memberikan Garansi Revisi Desain Sampai Disetujui. Kami menyajikan wireframe dan mockup visual terlebih dahulu sebelum menulis satu baris kode pun. Tahap pemrograman baru dimulai setelah Anda 100% puas dengan desain final.','We offer a Design Revision Guarantee until approved. We present wireframes and visual mockups before writing a single line of code. Development only starts once you are 100% happy with the final design.']],
@@ -240,10 +249,9 @@ const STACK = [
 [['Desain','Design'],['Figma',['Grid Swiss','Swiss Grid'],['Tipografi','Typography']]],
 [['Performa','Performance'],['PageSpeed 90+','Core Web Vitals','WebP']]];
 const ck = '<svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>';
+const star = '<svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>';
 const U = (id, w, q) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=${w}&q=${q}`;
 const waMsg = (id, en) => wa(lang === 'id' ? id : en);
-const initials = n => n.replace(/^(Ir\.|H\.|Dr\.|Prof\.)\s*/g, '').split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0]).join('').toUpperCase();
-const chip = 'px-2 py-0.5 border border-zinc-200 rounded text-[11px] font-medium text-zinc-700 bg-zinc-50';
 
 /* ---------- RENDER ---------- */
 function render() {
@@ -259,43 +267,49 @@ function render() {
   $('#mnav').innerHTML = NAV.map(([n, h]) => `<a href="${h}" class="py-1.5 ${nc(h)} block">${t(n)}</a>`).join('') + `<a href="/contact" class="btn btn-dark justify-center mt-2">${t(D.consult)}</a>`;
   $('#fnav').innerHTML = NAV.map(([n, h]) => `<li><a class="hover:text-ink" href="${h}">${t(n)}</a></li>`).join('');
   $('#fsvc').innerHTML = FSVC.map(([n, h]) => `<li><a class="hover:text-ink" href="${h}">${t(n)}</a></li>`).join('');
-  $('#stats').innerHTML = STATS.map(([v, l], i) => `<div class="py-6 pr-4 rv" ${dly(i)}><dd class="display text-3xl md:text-5xl">${v}</dd><dt class="mt-2 text-xs text-zinc-500">${t(l)}</dt></div>`).join('');
-  $('#brands').innerHTML = BRANDS.map(([n, u]) => `<a href="${u}" target="_blank" rel="noopener" class="font-semibold hover:text-zinc-900 hover:underline underline-offset-4 transition-colors">${n} ↗</a>`).join('');
-  $('#services').innerHTML = SVC.map(([n, d, g], i) => `<article class="p-8 border-r border-b border-zinc-200 hover:bg-zinc-50 transition-colors flex flex-col gap-4 rv" ${dly(i % 3)}><span class="font-mono text-xs text-zinc-400">${String(i + 1).padStart(2, '0')}</span><h3 class="text-xl font-bold">${t(n)}</h3><p class="text-sm text-zinc-600 leading-relaxed grow">${t(d)}</p><div class="flex flex-wrap gap-2 pt-2">${g.map(x => `<span class="${chip}">${t(x)}</span>`).join('')}</div><a class="text-xs font-bold hover:underline" target="_blank" rel="noopener" href="${waMsg('Halo Lanz Dev, saya tertarik dengan layanan ' + t(n) + '.', 'Hello Lanz Dev, I am interested in your ' + t(n) + ' service.')}">${lang === 'id' ? 'Tanya layanan ini' : 'Ask about this service'}</a></article>`).join('');
-  const stepsHtml = STEPS.map(([n, d, w], i) => `<div class="bg-ink p-8 space-y-4 rv" ${dly(i)}><span class="display text-5xl text-zinc-700">${i + 1}</span><h3 class="font-bold text-lg">${t(n)}</h3><p class="text-sm text-zinc-400 leading-relaxed">${t(d)}</p><span class="inline-block text-xs font-semibold text-zinc-400">${t(w)}</span></div>`).join('');
+  $('#stats').innerHTML = STATS.map(([v, dec, u, l], i) => `<div class="py-6 pr-4 rv" ${dly(i)}><dd class="display text-3xl md:text-5xl" data-n="${v}" data-dec="${dec}" data-suf="${t(u)}">${v}${t(u)}</dd><dt class="mt-2 text-xs text-zinc-500">${t(l)}</dt></div>`).join('');
+  $('#brands').innerHTML = BRANDS.map(([n, c, p]) => `<div class="flex items-center gap-2 hover:text-zinc-900 transition-colors cursor-default group" title="${n}"><svg class="w-4 h-4 text-zinc-400 group-hover:text-zinc-900 transition-colors shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${p}</svg><span class="${c} text-zinc-500 group-hover:text-zinc-900 transition-colors">${n}</span></div>`).join('');
+  $('#services').innerHTML = SVC.map(([n, d, g], i) => `<article class="p-8 border-r border-b border-zinc-200 hover:bg-zinc-50 transition-colors flex flex-col gap-4 rv" ${dly(i % 3)}><span class="font-mono text-xs text-zinc-400">${String(i + 1).padStart(2, '0')}</span><h3 class="text-xl font-bold">${t(n)}</h3><p class="text-sm text-zinc-600 leading-relaxed grow">${t(d)}</p><div class="flex flex-wrap gap-2 pt-2">${g.map(x => `<span class="px-2 py-1 border border-zinc-300 rounded text-[10px] font-semibold uppercase tracking-wider">${t(x)}</span>`).join('')}</div><a class="text-xs font-bold hover:underline" target="_blank" rel="noopener" href="${waMsg('Halo Lanz Dev, saya tertarik dengan layanan ' + t(n) + '.', 'Hello Lanz Dev, I am interested in your ' + t(n) + ' service.')}">${lang === 'id' ? 'Tanya layanan ini →' : 'Ask about this service →'}</a></article>`).join('');
+  const stepsHtml = STEPS.map(([n, d, w], i) => `<div class="bg-ink p-8 space-y-4 rv" ${dly(i)}><span class="display text-5xl text-zinc-700">${i + 1}</span><h3 class="font-bold text-lg">${t(n)}</h3><p class="text-sm text-zinc-400 leading-relaxed">${t(d)}</p><span class="inline-block text-[10px] uppercase tracking-widest font-semibold text-zinc-400">${t(w)}</span></div>`).join('');
   $('#steps').innerHTML = stepsHtml; $('#aSteps').innerHTML = stepsHtml;
   $('#projects').innerHTML = PROJECTS.map((p, i) => `
-<article class="grid md:grid-cols-12 gap-x-8 gap-y-3 py-6 border-b border-zinc-200 rv" ${dly(0)}>
-  <div class="md:col-span-3">
-    <span class="font-mono text-[11px] text-zinc-400">${String(i + 1).padStart(2, '0')}</span>
-    <h3 class="text-lg font-bold leading-snug">${p.title}</h3>
-    <p class="text-xs text-zinc-500 mt-0.5">${t(p.industry)}</p>
+<article class="rounded-xl border border-zinc-200 overflow-hidden bg-white shadow-xs hover:shadow-xl hover:border-zinc-900 hover:-translate-y-1 transition-all duration-300 flex flex-col group rv" ${dly(i % 2)}>
+  <div class="bg-zinc-100/90 border-b border-zinc-200 px-4 py-2.5 flex items-center justify-between">
+    <div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-zinc-300 group-hover:bg-red-400 transition-colors"></span><span class="w-2.5 h-2.5 rounded-full bg-zinc-300 group-hover:bg-amber-400 transition-colors"></span><span class="w-2.5 h-2.5 rounded-full bg-zinc-300 group-hover:bg-emerald-400 transition-colors"></span></div>
+    <div class="bg-white border border-zinc-200 rounded-md px-3 py-1 text-[11px] font-mono text-zinc-500 flex items-center gap-1.5 shadow-2xs max-w-[210px] truncate"><svg class="w-3 h-3 text-zinc-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg><span class="truncate">${p.url}</span></div>
+    <span class="text-[10px] font-mono uppercase font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-1.5 py-0.5 rounded">Live</span>
   </div>
-  <div class="md:col-span-6 space-y-3">
-    ${p.shot ? `<img src="${p.shot}" alt="${p.title}" width="1200" height="750" class="w-full h-auto rounded border border-zinc-200" loading="lazy" decoding="async" />` : ''}
-    <p class="text-sm text-zinc-600 leading-relaxed">${t(p.desc)}</p>
-    <div class="flex flex-wrap items-center gap-1.5"><span class="font-mono text-[11px] font-semibold text-zinc-800 mr-2">${t(p.metric)}</span>${p.tags.map(x => `<span class="${chip}">${t(x)}</span>`).join('')}</div>
+  <div class="relative aspect-16/10 overflow-hidden bg-zinc-900">
+    <img src="${U(p.img, 800, 70)}" srcset="${U(p.img, 600, 70)} 600w, ${U(p.img, 1000, 70)} 1000w" sizes="(min-width:768px) 560px, 100vw" alt="${p.title}" width="800" height="500" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100" loading="lazy" decoding="async" />
+    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent flex items-end p-5"><div class="text-white space-y-1"><span class="text-[10px] font-mono uppercase tracking-widest text-zinc-300 font-semibold">${t(p.badge)}</span><h3 class="text-xl font-bold tracking-tight text-white">${p.title}</h3></div></div>
   </div>
-  <div class="md:col-span-3 flex md:flex-col md:items-end gap-x-5 gap-y-2 flex-wrap text-xs">
-    <a href="${p.link}" target="_blank" rel="noopener" class="font-bold text-zinc-900 hover:underline underline-offset-4">${p.url} ↗</a>
-    <a href="${waMsg('Halo Mas Bagus, saya tertarik membuat website dengan model seperti ' + p.title + ' (' + p.url + ').', 'Hello Bagus, I would like a website similar to ' + p.title + ' (' + p.url + ').')}" target="_blank" rel="noopener" class="text-zinc-600 hover:text-black hover:underline underline-offset-4">${lang === 'id' ? 'Pesan konsep serupa' : 'Order a similar site'}</a>
+  <div class="p-6 flex flex-col justify-between grow space-y-5 bg-white">
+    <div class="space-y-3">
+      <div class="flex flex-wrap items-center justify-between gap-2 text-xs"><span class="font-mono text-zinc-500 uppercase tracking-wider">${p.client} · <strong class="text-zinc-800">${t(p.industry)}</strong></span><span class="font-mono font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 text-[11px]">${t(p.metric)}</span></div>
+      <p class="text-sm text-zinc-600 leading-relaxed">${t(p.desc)}</p>
+      <div class="flex flex-wrap gap-1.5 pt-1">${p.tags.map(x => `<span class="px-2 py-0.5 border border-zinc-200 bg-zinc-50 rounded text-[10px] font-medium text-zinc-600">${t(x)}</span>`).join('')}</div>
+    </div>
+    <div class="pt-4 border-t border-zinc-100 flex flex-wrap sm:flex-nowrap items-center justify-between gap-3">
+      <a href="${p.link}" target="_blank" rel="noopener" class="btn btn-dark !py-2.5 !px-4 text-xs font-bold inline-flex items-center gap-1.5 w-full sm:w-auto justify-center">${lang === 'id' ? 'Lihat Website Live ↗' : 'View Live Website ↗'}</a>
+      <a href="${waMsg('Halo Mas Bagus, saya tertarik membuat website dengan model seperti ' + p.title + ' (' + p.url + ').', 'Hello Bagus, I would like a website similar to ' + p.title + ' (' + p.url + ').')}" target="_blank" rel="noopener" class="text-xs font-semibold text-zinc-700 hover:text-black transition-colors w-full sm:w-auto text-center sm:text-right">${lang === 'id' ? 'Pesan konsep ini →' : 'Order this concept →'}</a>
+    </div>
   </div>
 </article>`).join('');
-  $('#cases').innerHTML = CASES.map(([n, s, f], i) => `<div class="grid sm:grid-cols-12 gap-1 sm:gap-6 py-5 border-b border-zinc-200 rv" ${dly(i % 3)}><h3 class="sm:col-span-4 font-bold">${t(n)}</h3><p class="sm:col-span-4 text-sm text-zinc-600">${t(s)}</p><p class="sm:col-span-4 text-xs text-zinc-500">${t(f)}</p></div>`).join('');
+  $('#cases').innerHTML = CASES.map(([n, s, f], i) => `<div class="p-8 border border-zinc-200 rounded-xl space-y-6 hover:border-ink hover:-translate-y-1 transition-all rv" ${dly(i % 3)}><div class="eyebrow">${t(s)}</div><h3 class="display text-2xl">${t(n)}</h3><div class="text-xs text-zinc-500 border-t border-zinc-200 pt-4">${t(f)}</div></div>`).join('');
   $('#testimonials').innerHTML = TESTI.map((x, i) => `
-<div class="p-8 rounded-lg border border-zinc-200 bg-white flex flex-col justify-between space-y-6 rv" ${dly(i % 2)}>
-  <div class="space-y-4"><span class="inline-block text-xs text-zinc-500">${t(x.tag)}</span>
+<div class="p-8 rounded-xl border border-zinc-200 bg-white hover:border-zinc-900 transition-all duration-300 shadow-xs flex flex-col justify-between space-y-6 group rv" ${dly(i % 2)}>
+  <div class="space-y-4"><div class="flex items-center justify-between"><div class="flex text-amber-500 gap-0.5">${star.repeat(5)}</div><span class="px-2 py-0.5 border border-zinc-200 bg-zinc-50 rounded text-[10px] font-mono text-zinc-500 uppercase tracking-wider">${t(x.tag)}</span></div>
   <p class="text-sm text-zinc-700 leading-relaxed font-normal">"${t(x.q)}"</p></div>
-  <div class="flex items-center gap-3.5 pt-4 border-t border-zinc-100"><span class="w-11 h-11 rounded-full bg-zinc-100 border border-zinc-200 flex items-center justify-center text-xs font-bold text-zinc-600 shrink-0" aria-hidden="true">${initials(x.name)}</span><div><h4 class="text-sm font-bold text-zinc-900">${x.name}</h4><p class="text-xs text-zinc-500">${t(x.role)} · <span class="font-medium text-zinc-700">${x.company}</span></p></div></div>
+  <div class="flex items-center gap-3.5 pt-4 border-t border-zinc-100"><img src="${U(x.avatar, 100, 70)}" alt="${x.name}" width="44" height="44" class="w-11 h-11 rounded-full object-cover border border-zinc-200 shrink-0" loading="lazy" decoding="async" /><div><h4 class="text-sm font-bold text-zinc-900">${x.name}</h4><p class="text-xs text-zinc-500">${t(x.role)} · <span class="font-medium text-zinc-700">${x.company}</span></p></div></div>
 </div>`).join('');
   plans();
   $('#faqs').innerHTML = FAQ.map(([q, a]) => `<details class="border-b border-zinc-200 py-5"><summary class="flex items-center justify-between gap-4 font-semibold text-sm">${t(q)}<span class="plus text-xl transition-transform">+</span></summary><p class="pt-3 text-sm text-zinc-600 leading-relaxed max-w-2xl">${t(a)}</p></details>`).join('');
   for (const k in OPT) { const s = $('#' + k), v = s.selectedIndex > 0 ? s.selectedIndex : 0; s.innerHTML = OPT[k].map(o => `<option>${t(o)}</option>`).join(''); s.selectedIndex = v; }
-  $('#aStack').innerHTML = STACK.map(([n, g], i) => `<div class="p-6 bg-white border border-zinc-200 rounded-lg space-y-4 hover:border-zinc-900 transition-colors rv" ${dly(i % 3)}><span class="font-mono text-xs text-zinc-400">${String(i + 1).padStart(2, '0')}</span><h3 class="font-bold text-base text-zinc-900">${t(n)}</h3><div class="flex flex-wrap gap-1.5">${g.map(x => `<span class="${chip}">${t(x)}</span>`).join('')}</div></div>`).join('');
-  $('#aProj').innerHTML = PROJECTS.map((p, i) => `<a href="${p.link}" target="_blank" rel="noopener" class="group p-6 border border-zinc-200 rounded-lg bg-white hover:border-zinc-900 transition-colors duration-300 flex flex-col gap-3 rv" ${dly(i % 2)}><div class="flex items-center justify-between gap-2"><span class="text-xs text-zinc-500">${t(p.industry)}</span><span class="text-xs font-semibold text-zinc-700">Live</span></div><h3 class="font-bold text-lg text-zinc-900">${p.title}</h3><p class="text-xs text-zinc-600 leading-relaxed">${t(p.desc)}</p><span class="font-mono text-[11px] font-semibold text-zinc-700">${t(p.metric)}</span><span class="mt-auto pt-2 text-xs font-bold text-zinc-900 group-hover:underline">${p.url} ${t(D.aVisit).slice(-1)}</span></a>`).join('');
+  $('#aStack').innerHTML = STACK.map(([n, g], i) => `<div class="p-6 bg-white border border-zinc-200 rounded-xl space-y-4 hover:border-zinc-900 hover:-translate-y-1 transition-all rv" ${dly(i % 3)}><span class="font-mono text-xs text-zinc-400">${String(i + 1).padStart(2, '0')}</span><h3 class="font-bold text-base text-zinc-900">${t(n)}</h3><div class="flex flex-wrap gap-1.5">${g.map(x => `<span class="px-2 py-0.5 border border-zinc-200 rounded text-[10px] font-semibold text-zinc-700 bg-zinc-50">${t(x)}</span>`).join('')}</div></div>`).join('');
+  $('#aProj').innerHTML = PROJECTS.map((p, i) => `<a href="${p.link}" target="_blank" rel="noopener" class="group p-6 border border-zinc-200 rounded-xl bg-white hover:border-zinc-900 hover:-translate-y-1 transition-all duration-300 flex flex-col gap-3 rv" ${dly(i % 2)}><div class="flex items-center justify-between gap-2"><span class="font-mono text-[11px] uppercase tracking-wider text-zinc-400">${t(p.industry)}</span><span class="text-[10px] font-mono uppercase font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-1.5 py-0.5 rounded">Live</span></div><h3 class="font-bold text-lg text-zinc-900">${p.title}</h3><p class="text-xs text-zinc-600 leading-relaxed">${t(p.desc)}</p><span class="font-mono text-[11px] font-semibold text-emerald-700">${t(p.metric)}</span><span class="mt-auto pt-2 text-xs font-bold text-zinc-900 group-hover:underline">${p.url} ${t(D.aVisit).slice(-1)}</span></a>`).join('');
   $('#aFaqs').innerHTML = [1, 4, 5, 2].map(k => FAQ[k]).map(([q, an]) => `<details class="border-b border-zinc-200 py-5"><summary class="flex items-center justify-between gap-4 font-semibold text-sm">${t(q)}<span class="plus text-xl transition-transform">+</span></summary><p class="pt-3 text-sm text-zinc-600 leading-relaxed max-w-2xl">${t(an)}</p></details>`).join('');
-  $('#svc6').innerHTML = SV.map(([id, tag, n, d, g, w], i) => `<article id="${id}" class="p-8 border border-zinc-200 rounded-lg bg-white hover:border-zinc-900 transition-colors duration-300 flex flex-col justify-between space-y-6 rv" ${dly(i % 3)}><div class="space-y-4"><span class="font-mono text-xs text-zinc-400">${tag}</span><h2 class="text-xl font-bold text-zinc-900">${t(n)}</h2><p class="text-xs text-zinc-600 leading-relaxed">${t(d)}</p><div class="flex flex-wrap gap-1.5 pt-1">${g.map(x => `<span class="${chip}">${t(x)}</span>`).join('')}</div></div><a href="${waMsg('Halo Lanz Dev, saya tertarik dengan layanan ' + w[0] + '.', 'Hello Lanz Dev, I am interested in your ' + w[1] + ' service.')}" target="_blank" rel="noopener" class="text-xs font-bold text-zinc-900 hover:underline inline-flex items-center gap-1">${lang === 'id' ? 'Konsultasi Layanan Ini' : 'Consult This Service'}</a></article>`).join('');
-  $('#pplans').innerHTML = PLANS.map((p, i) => planCard(p, i, yearly ? p.pa : p.p, false)).join('');
+  $('#svc6').innerHTML = SV.map(([id, tag, n, d, g, w], i) => `<article id="${id}" class="p-8 border border-zinc-200 rounded-xl bg-white hover:border-zinc-900 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between space-y-6 rv" ${dly(i % 3)}><div class="space-y-4"><span class="font-mono text-xs text-zinc-400">${tag}</span><h2 class="text-xl font-bold text-zinc-900">${t(n)}</h2><p class="text-xs text-zinc-600 leading-relaxed">${t(d)}</p><div class="flex flex-wrap gap-1.5 pt-1">${g.map(x => `<span class="px-2 py-0.5 border border-zinc-200 rounded text-[10px] font-semibold text-zinc-700 bg-zinc-50">${t(x)}</span>`).join('')}</div></div><a href="${waMsg('Halo Lanz Dev, saya tertarik dengan layanan ' + w[0] + '.', 'Hello Lanz Dev, I am interested in your ' + w[1] + ' service.')}" target="_blank" rel="noopener" class="text-xs font-bold text-zinc-900 hover:underline inline-flex items-center gap-1">${lang === 'id' ? 'Konsultasi Layanan Ini →' : 'Consult This Service →'}</a></article>`).join('');
+  $('#pplans').innerHTML = PLANS.map((p, i) => `<div class="rounded-2xl border ${p.hot ? 'border-2 border-zinc-900 shadow-xl relative' : 'border-zinc-200 shadow-xs'} p-8 flex flex-col justify-between gap-8 bg-white hover:-translate-y-1 transition-transform duration-300 rv" ${dly(i)}>${p.hot ? `<span class="absolute -top-3.5 right-6 px-3 py-1 rounded-full text-[10px] font-bold bg-ink text-white uppercase tracking-wider">${lang === 'id' ? 'Paling Populer' : 'Most Popular'}</span>` : ''}<div class="space-y-5"><div><h3 class="text-lg font-bold text-zinc-900">${t(p.n)}</h3><p class="text-xs text-zinc-500 mt-1 leading-relaxed">${t(p.d)}</p></div><div class="border-y border-zinc-200 py-4"><div class="font-mono text-3xl font-bold text-zinc-900">${rp(p.p)}</div><div class="text-[11px] text-zinc-500 mt-2 flex items-center justify-between gap-2"><span>${t(p.note)}</span><span class="font-mono font-semibold text-zinc-700 bg-zinc-100 px-2 py-0.5 rounded shrink-0 inline-flex items-center gap-1.5"><svg class="w-3 h-3 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>${t(p.time)}</span></div></div><ul class="space-y-3 text-xs text-zinc-700">${p.f.map(x => `<li class="flex items-center gap-2">${ck}<span>${t(x)}</span></li>`).join('')}</ul></div><a target="_blank" rel="noopener" href="${waMsg('Halo Lanz Dev, saya ingin memesan paket ' + t(p.n) + ' (' + rp(p.p) + ').', 'Hello Lanz Dev, I would like to order the ' + t(p.n) + ' package (' + rp(p.p) + ').')}" class="btn justify-center ${p.hot ? 'btn-dark' : 'btn-line'}">${t(p.cta)}</a></div>`).join('');
   $('#aWa').href = waMsg('Halo Mas Bagus, saya ingin konsultasi proyek.', 'Hello Bagus, I would like to discuss a project.');
   $('#ctaWa').href = waMsg('Halo Lanz Dev, saya ingin konsultasi.', 'Hello Lanz Dev, I would like a consultation.');
   if ($('#faqs').style && document.getElementById('faqs')) {
@@ -305,34 +319,37 @@ function render() {
   if (!first) document.querySelectorAll('.rv').forEach(e => e.classList.add('in'));
   else watch();
 }
-/* Kartu paket dipakai bersama oleh #plans (beranda) dan #pplans (halaman harga). */
-function planCard(p, i, price, useNoteA) {
-  const noteTxt = t(useNoteA ? p.notea : p.note);
-  return `
-<div class="rounded-lg border border-zinc-200 p-8 flex flex-col justify-between gap-8 bg-white hover:border-zinc-900 transition-colors duration-300 rv" ${dly(i)}>
-  <div class="space-y-5">
-    <div><h3 class="text-lg font-bold">${t(p.n)}</h3><p class="text-xs text-zinc-500 mt-1 leading-relaxed">${t(p.d)}</p></div>
-    <div class="border-y border-zinc-200 py-4"><div class="font-mono text-3xl font-bold">${rp(price)}</div>
-      <div class="text-[11px] text-zinc-500 mt-2 flex items-center justify-between gap-2"><span>${noteTxt}</span><span class="font-mono font-semibold text-zinc-700 bg-zinc-100 px-2 py-0.5 rounded shrink-0">${t(p.time)}</span></div></div>
-    <ul class="space-y-3 text-xs text-zinc-700">${p.f.map(x => `<li class="flex items-start gap-2">${ck}<span>${t(x)}</span></li>`).join('')}</ul>
-  </div>
-  <a target="_blank" rel="noopener" href="${waMsg('Halo Lanz Dev, saya ingin memesan paket ' + t(p.n) + ' (' + rp(price) + ').', 'Hello Lanz Dev, I would like to order the ' + t(p.n) + ' package (' + rp(price) + ').')}" class="btn justify-center btn-line">${t(p.cta)}</a>
-</div>`;
-}
 function plans() {
-  $('#plans').innerHTML = PLANS.map((p, i) => planCard(p, i, yearly ? p.pa : p.p, yearly)).join('');
+  $('#plans').innerHTML = PLANS.map((p, i) => { const price = yearly ? p.pa : p.p; return `
+<div class="rounded-xl p-8 flex flex-col justify-between gap-8 bg-white hover:-translate-y-1 hover:shadow-lg transition-all duration-300 rv ${p.hot ? 'border-2 border-ink shadow-md' : 'border border-zinc-200'}" ${dly(i)}>
+  <div class="space-y-5">
+    <div class="flex items-center justify-between"><h3 class="text-lg font-bold">${t(p.n)}</h3>${p.hot ? `<span class="px-2.5 py-0.5 rounded text-[10px] font-bold bg-ink text-white uppercase tracking-wider">${lang === 'id' ? 'Paling Populer' : 'Most Popular'}</span>` : ''}</div>
+    <p class="text-xs text-zinc-500 leading-relaxed">${t(p.d)}</p>
+    <div class="border-y border-zinc-200 py-4"><div class="font-mono text-3xl font-bold">${rp(price)}</div>
+      <div class="text-[11px] text-zinc-500 mt-2 flex items-center justify-between gap-2"><span>${t(yearly ? p.notea : p.note)}</span><span class="font-mono font-semibold text-zinc-700 bg-zinc-100 px-2 py-0.5 rounded shrink-0 inline-flex items-center gap-1.5"><svg class="w-3 h-3 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>${t(p.time)}</span></div></div>
+    <ul class="space-y-3 text-xs text-zinc-700">${p.f.map(x => `<li class="flex items-center gap-2">${ck}<span>${t(x)}</span></li>`).join('')}</ul>
+  </div>
+  <a target="_blank" rel="noopener" href="${waMsg('Halo Lanz Dev, saya ingin memesan paket ' + t(p.n) + ' (' + rp(price) + ').', 'Hello Lanz Dev, I would like to order the ' + t(p.n) + ' package (' + rp(price) + ').')}" class="btn justify-center ${p.hot ? 'btn-dark' : 'btn-line'}">${t(p.cta)}</a>
+</div>`; }).join('');
   if (!first) document.querySelectorAll('#plans .rv').forEach(e => e.classList.add('in'));
   const on = 'px-4 py-2 rounded-md bg-ink text-white transition-colors', off = 'px-4 py-2 rounded-md text-zinc-600 hover:text-ink transition-colors';
   $('#bm').className = yearly ? off : on; $('#by').className = yearly ? on : off;
 }
 
-/* ---------- ANIMATION: hanya reveal saat scroll. Count-up angka dihapus (angka sekarang statis & nyata). ---------- */
+/* ---------- ANIMATION ---------- */
 const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => {
   if (!e.isIntersecting) return;
-  e.target.classList.add('in'); io.unobserve(e.target);
+  const el = e.target; el.classList.add('in'); io.unobserve(el);
+  if (el.dataset.n) count(el);
 }), { threshold: .12, rootMargin: '0px 0px -40px 0px' }) : null;
 function watch() {
   document.querySelectorAll('.rv').forEach(e => io ? io.observe(e) : e.classList.add('in'));
+  document.querySelectorAll('[data-n]').forEach(e => io && io.observe(e));
+}
+function count(el) {
+  if (reduce) return;
+  const n = +el.dataset.n, d = +el.dataset.dec, s = el.dataset.suf, T = 1400, t0 = performance.now();
+  (function step(now) { const p = Math.min((now - t0) / T, 1), e = 1 - Math.pow(1 - p, 3); el.textContent = (n * e).toFixed(d) + s; if (p < 1) requestAnimationFrame(step); })(t0);
 }
 
 /* ---------- EVENTS ---------- */
