@@ -265,22 +265,20 @@ function render() {
   const stepsHtml = STEPS.map(([n, d, w], i) => `<div class="bg-ink p-8 space-y-4 rv" ${dly(i)}><span class="display text-5xl text-zinc-700">${i + 1}</span><h3 class="font-bold text-lg">${t(n)}</h3><p class="text-sm text-zinc-400 leading-relaxed">${t(d)}</p><span class="inline-block text-xs font-semibold text-zinc-400">${t(w)}</span></div>`).join('');
   $('#steps').innerHTML = stepsHtml; $('#aSteps').innerHTML = stepsHtml;
   $('#projects').innerHTML = PROJECTS.map((p, i) => `
-<article class="grid md:grid-cols-12 gap-6 md:gap-12 py-12 border-b border-zinc-200 rv" ${dly(0)}>
-  <div class="md:col-span-5 space-y-3">
-    <span class="font-mono text-xs text-zinc-400">${String(i + 1).padStart(2, '0')}</span>
-    <h3 class="display text-3xl md:text-5xl leading-none">${p.title}</h3>
-    <p class="text-sm text-zinc-500">${p.client} · ${t(p.industry)}</p>
-    <a href="${p.link}" target="_blank" rel="noopener" class="inline-block font-mono text-xs text-zinc-700 hover:underline underline-offset-4">${p.url} ↗</a>
+<article class="grid md:grid-cols-12 gap-x-8 gap-y-3 py-6 border-b border-zinc-200 rv" ${dly(0)}>
+  <div class="md:col-span-3">
+    <span class="font-mono text-[11px] text-zinc-400">${String(i + 1).padStart(2, '0')}</span>
+    <h3 class="text-lg font-bold leading-snug">${p.title}</h3>
+    <p class="text-xs text-zinc-500 mt-0.5">${t(p.industry)}</p>
   </div>
-  <div class="md:col-span-7 space-y-6">
-    ${p.shot ? `<img src="${p.shot}" alt="${p.title}" width="1200" height="750" class="w-full h-auto rounded-md border border-zinc-200" loading="lazy" decoding="async" />` : ''}
-    <p class="text-base text-zinc-700 leading-relaxed">${t(p.desc)}</p>
-    <p class="font-mono text-sm font-semibold text-zinc-900">${t(p.metric)}</p>
-    <div class="flex flex-wrap gap-2">${p.tags.map(x => `<span class="${chip}">${t(x)}</span>`).join('')}</div>
-    <div class="flex flex-wrap items-center gap-x-6 gap-y-3 pt-2">
-      <a href="${p.link}" target="_blank" rel="noopener" class="btn btn-dark !py-2.5 !px-5 text-sm font-bold">${lang === 'id' ? 'Kunjungi website ↗' : 'Visit website ↗'}</a>
-      <a href="${waMsg('Halo Mas Bagus, saya tertarik membuat website dengan model seperti ' + p.title + ' (' + p.url + ').', 'Hello Bagus, I would like a website similar to ' + p.title + ' (' + p.url + ').')}" target="_blank" rel="noopener" class="text-sm font-semibold text-zinc-700 hover:text-black hover:underline underline-offset-4">${lang === 'id' ? 'Pesan konsep serupa' : 'Order a similar site'}</a>
-    </div>
+  <div class="md:col-span-6 space-y-3">
+    ${p.shot ? `<img src="${p.shot}" alt="${p.title}" width="1200" height="750" class="w-full h-auto rounded border border-zinc-200" loading="lazy" decoding="async" />` : ''}
+    <p class="text-sm text-zinc-600 leading-relaxed">${t(p.desc)}</p>
+    <div class="flex flex-wrap items-center gap-1.5"><span class="font-mono text-[11px] font-semibold text-zinc-800 mr-2">${t(p.metric)}</span>${p.tags.map(x => `<span class="${chip}">${t(x)}</span>`).join('')}</div>
+  </div>
+  <div class="md:col-span-3 flex md:flex-col md:items-end gap-x-5 gap-y-2 flex-wrap text-xs">
+    <a href="${p.link}" target="_blank" rel="noopener" class="font-bold text-zinc-900 hover:underline underline-offset-4">${p.url} ↗</a>
+    <a href="${waMsg('Halo Mas Bagus, saya tertarik membuat website dengan model seperti ' + p.title + ' (' + p.url + ').', 'Hello Bagus, I would like a website similar to ' + p.title + ' (' + p.url + ').')}" target="_blank" rel="noopener" class="text-zinc-600 hover:text-black hover:underline underline-offset-4">${lang === 'id' ? 'Pesan konsep serupa' : 'Order a similar site'}</a>
   </div>
 </article>`).join('');
   $('#cases').innerHTML = CASES.map(([n, s, f], i) => `<div class="grid sm:grid-cols-12 gap-1 sm:gap-6 py-5 border-b border-zinc-200 rv" ${dly(i % 3)}><h3 class="sm:col-span-4 font-bold">${t(n)}</h3><p class="sm:col-span-4 text-sm text-zinc-600">${t(s)}</p><p class="sm:col-span-4 text-xs text-zinc-500">${t(f)}</p></div>`).join('');
