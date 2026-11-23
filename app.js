@@ -265,24 +265,21 @@ function render() {
   const stepsHtml = STEPS.map(([n, d, w], i) => `<div class="bg-ink p-8 space-y-4 rv" ${dly(i)}><span class="display text-5xl text-zinc-700">${i + 1}</span><h3 class="font-bold text-lg">${t(n)}</h3><p class="text-sm text-zinc-400 leading-relaxed">${t(d)}</p><span class="inline-block text-xs font-semibold text-zinc-400">${t(w)}</span></div>`).join('');
   $('#steps').innerHTML = stepsHtml; $('#aSteps').innerHTML = stepsHtml;
   $('#projects').innerHTML = PROJECTS.map((p, i) => `
-<article class="rounded-lg border border-zinc-200 overflow-hidden bg-white hover:border-zinc-900 transition-colors duration-300 flex flex-col group rv" ${dly(i % 2)}>
-  <div class="px-5 py-3 border-b border-zinc-200 flex items-center justify-between gap-3 text-xs">
-    <span class="font-mono text-zinc-500 truncate">${p.url}</span>
-    <span class="font-semibold text-zinc-700 shrink-0">Live</span>
+<article class="grid md:grid-cols-12 gap-6 md:gap-12 py-12 border-b border-zinc-200 rv" ${dly(0)}>
+  <div class="md:col-span-5 space-y-3">
+    <span class="font-mono text-xs text-zinc-400">${String(i + 1).padStart(2, '0')}</span>
+    <h3 class="display text-3xl md:text-5xl leading-none">${p.title}</h3>
+    <p class="text-sm text-zinc-500">${p.client} · ${t(p.industry)}</p>
+    <a href="${p.link}" target="_blank" rel="noopener" class="inline-block font-mono text-xs text-zinc-700 hover:underline underline-offset-4">${p.url} ↗</a>
   </div>
-  <div class="relative aspect-16/10 overflow-hidden bg-zinc-900">
-    <img src="${U(p.img, 800, 70)}" srcset="${U(p.img, 600, 70)} 600w, ${U(p.img, 1000, 70)} 1000w" sizes="(min-width:768px) 560px, 100vw" alt="${p.title}" width="800" height="500" class="w-full h-full object-cover object-center opacity-90" loading="lazy" decoding="async" />
-    <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent flex items-end p-5"><div class="text-white space-y-1"><span class="text-xs text-zinc-300 font-semibold">${t(p.badge)}</span><h3 class="text-xl font-bold tracking-tight text-white">${p.title}</h3></div></div>
-  </div>
-  <div class="p-6 flex flex-col justify-between grow space-y-5 bg-white">
-    <div class="space-y-3">
-      <div class="flex flex-wrap items-center justify-between gap-2 text-xs"><span class="text-zinc-500">${p.client} · <strong class="text-zinc-800">${t(p.industry)}</strong></span><span class="font-mono font-semibold text-zinc-700 bg-zinc-100 px-2 py-0.5 rounded text-[11px]">${t(p.metric)}</span></div>
-      <p class="text-sm text-zinc-600 leading-relaxed">${t(p.desc)}</p>
-      <div class="flex flex-wrap gap-1.5 pt-1">${p.tags.map(x => `<span class="${chip}">${t(x)}</span>`).join('')}</div>
-    </div>
-    <div class="pt-4 border-t border-zinc-100 flex flex-wrap sm:flex-nowrap items-center justify-between gap-3">
-      <a href="${p.link}" target="_blank" rel="noopener" class="btn btn-dark !py-2.5 !px-4 text-xs font-bold inline-flex items-center gap-1.5 w-full sm:w-auto justify-center">${lang === 'id' ? 'Lihat Website Live ↗' : 'View Live Website ↗'}</a>
-      <a href="${waMsg('Halo Mas Bagus, saya tertarik membuat website dengan model seperti ' + p.title + ' (' + p.url + ').', 'Hello Bagus, I would like a website similar to ' + p.title + ' (' + p.url + ').')}" target="_blank" rel="noopener" class="text-xs font-semibold text-zinc-700 hover:text-black transition-colors w-full sm:w-auto text-center sm:text-right">${lang === 'id' ? 'Pesan konsep ini' : 'Order this concept'}</a>
+  <div class="md:col-span-7 space-y-6">
+    ${p.shot ? `<img src="${p.shot}" alt="${p.title}" width="1200" height="750" class="w-full h-auto rounded-md border border-zinc-200" loading="lazy" decoding="async" />` : ''}
+    <p class="text-base text-zinc-700 leading-relaxed">${t(p.desc)}</p>
+    <p class="font-mono text-sm font-semibold text-zinc-900">${t(p.metric)}</p>
+    <div class="flex flex-wrap gap-2">${p.tags.map(x => `<span class="${chip}">${t(x)}</span>`).join('')}</div>
+    <div class="flex flex-wrap items-center gap-x-6 gap-y-3 pt-2">
+      <a href="${p.link}" target="_blank" rel="noopener" class="btn btn-dark !py-2.5 !px-5 text-sm font-bold">${lang === 'id' ? 'Kunjungi website ↗' : 'Visit website ↗'}</a>
+      <a href="${waMsg('Halo Mas Bagus, saya tertarik membuat website dengan model seperti ' + p.title + ' (' + p.url + ').', 'Hello Bagus, I would like a website similar to ' + p.title + ' (' + p.url + ').')}" target="_blank" rel="noopener" class="text-sm font-semibold text-zinc-700 hover:text-black hover:underline underline-offset-4">${lang === 'id' ? 'Pesan konsep serupa' : 'Order a similar site'}</a>
     </div>
   </div>
 </article>`).join('');
