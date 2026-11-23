@@ -1,0 +1,11 @@
+/* antislop-ui patch: tempel di AKHIR style.css (setelah rule lama) */
+
+/* Label section: bukan uppercase + tracking ekstrem (R-06) */
+.eyebrow{text-transform:none;letter-spacing:.01em;font-weight:600}
+
+/* Sisa animasi dekoratif dari hero lama: tidak ada lagi yang memakainya,
+   dimatikan agar tidak ada loop tanpa tujuan (R-19) */
+.fl,.fl2,.pulse-dot{animation:none!important}
+
+/* Ruang tinggi tetap untuk hero tanpa mockup, mencegah CLS (R-40) */
+#stats dd{font-variant-numeric:tabular-nums}
